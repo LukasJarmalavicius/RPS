@@ -20,6 +20,7 @@ let tScore = 1;
 const cScoreUpdate = document.querySelector('.cScore');
 const pScoreUpdate = document.querySelector('.pScore');
 const pizza = document.querySelector('.container')
+const spaghetti = document.querySelector('.wincontainer')
 
 let roundButton = document.querySelectorAll('#btn');
 let resetButton = document.querySelector('.restart');
@@ -34,7 +35,8 @@ roundButton.forEach((button) => {
 resetButton.addEventListener('click', () => {
     pScoreUpdate.innerHTML = 0;
     cScoreUpdate.innerHTML = 0;
-    pizza.innerHTML = ""
+    pizza.innerHTML = "Results here"
+    spaghetti.innerHTML = ""
     pScore = 0;
     cScore = 0;
     tScore = 1;
@@ -43,11 +45,7 @@ function sendResult(winner){
     pScoreUpdate.innerHTML = pScore;
     cScoreUpdate.innerHTML = cScore;
     const ResultCont = document.querySelector('.container');
-    const sendResultDiv = document.createElement('div')
-        sendResultDiv.classList.add('content');
-        sendResultDiv.textContent = winner;
-        ResultCont.appendChild(sendResultDiv);
-    
+    ResultCont.textContent = winner;
 }
 
 function playRound (playerSelection, computerSelection) {
@@ -70,9 +68,19 @@ function playRound (playerSelection, computerSelection) {
                 sendResult("you lost! " + computerSelection + " beats " + playerSelect);
         }
     }
-    if (pScore === 5|| cScore === 5) {
+    if (pScore === 5) {
+
         if (tScore === 1) {
         sendResult("game end");
+        spaghetti.innerHTML = " YOU WIN!"
+        tScore--;
+        }
+    }
+    if (cScore === 5) {
+
+        if (tScore === 1) {
+        sendResult("game end");
+        spaghetti.innerHTML = " COMPUTER WINS!"
         tScore--;
         }
     }

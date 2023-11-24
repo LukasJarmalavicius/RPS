@@ -5,3 +5,17 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 }
+
+.container {
+    font-size: 50px;
+    font-weight: bolder;
+    margin: 20px;
+}
+
+.buttons {
+gap: 50px;
+}
+
+.wincontainer {
+    font-size: 100px;
+}
