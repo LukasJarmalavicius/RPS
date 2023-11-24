@@ -12,6 +12,11 @@ align-items: center;
     margin: 20px;
 }
 
+.results {
+    display: flex;
+    gap: 10px;
+}
+
 .buttons {
 gap: 50px;
 }
