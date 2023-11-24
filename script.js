@@ -1,16 +1,12 @@
 function getComputerChoice () {
-    let choice = Math.floor(Math.random() * 3) + 1;
-    console.log(choice);
+    let choice = Math.floor(Math.random()*(3 - 1) + 1);
     switch (choice)
     {
         case 1:
-            console.log("rock");
             return "rock";
         case 2:
-            console.log("paper");
             return "paper";
         case 3:
-            console.log("scissors");
             return "scissors";  
   
     }
@@ -18,41 +14,70 @@ function getComputerChoice () {
 }
 let playerSelection;
 let computerSelection;
-let Pscore = 0;
-let compscore = 0;
+let pScore = 0;
+let cScore = 0;
+let tScore = 1;
+const cScoreUpdate = document.querySelector('.cScore');
+const pScoreUpdate = document.querySelector('.pScore');
+const pizza = document.querySelector('.container')
+
+let roundButton = document.querySelectorAll('#btn');
+let resetButton = document.querySelector('.restart');
+roundButton.forEach((button) => {
+    button.addEventListener('click', () => {
+        playerSelection = button.className;
+        playRound(playerSelection);
+
+    });
+})
+
+resetButton.addEventListener('click', () => {
+    pScoreUpdate.innerHTML = 0;
+    cScoreUpdate.innerHTML = 0;
+    pizza.innerHTML = ""
+    pScore = 0;
+    cScore = 0;
+    tScore = 1;
+})
+function sendResult(winner){
+    pScoreUpdate.innerHTML = pScore;
+    cScoreUpdate.innerHTML = cScore;
+    const ResultCont = document.querySelector('.container');
+    const sendResultDiv = document.createElement('div')
+        sendResultDiv.classList.add('content');
+        sendResultDiv.textContent = winner;
+        ResultCont.appendChild(sendResultDiv);
+    
+}
 
 function playRound (playerSelection, computerSelection) {
-    playerSelection = prompt("rock paper scissors");
     computerSelection = getComputerChoice();
     const playerSelect = playerSelection.toLowerCase();
-    if (computerSelection === playerSelect) {
-            console.log("you got a tie!");
+    if (pScore < 5 && cScore < 5) {
+        if (computerSelection === playerSelect) {
+            sendResult("you got a tie!");
+        }
+        if ((computerSelection === "rock" && playerSelect === "paper") ||
+            (computerSelection === "paper" && playerSelect === "scissors") ||
+            (computerSelection === "scissors" & playerSelect === "rock")) {
+                pScore++;
+                sendResult("you won! " + playerSelect + " beats " + computerSelection);
+        }
+        if ((computerSelection === "paper" && playerSelect === "rock") ||
+            (computerSelection === "scissors" && playerSelect === "paper") ||    
+            (computerSelection === "rock" && playerSelect === "scissors")) {
+                cScore++;
+                sendResult("you lost! " + computerSelection + " beats " + playerSelect);
+        }
     }
-    if ((computerSelection === "rock" && playerSelect === "paper") ||
-        (computerSelection === "paper" && playerSelect === "scissors") ||
-        (computerSelection === "scissors" & playerSelect === "rock")) {
-            Pscore++;
-            console.log("you won! " + playerSelect + " beats " + computerSelection);
-    }
-    if ((computerSelection === "paper" & playerSelect === "rock") ||
-        (computerSelection === "scissors" & playerSelect === "paper") ||    
-        (computerSelection === "rock" & playerSelect === "scissors")) {
-            compscore++;
-            console.log("you lost! " + computerSelection + " beats " + playerSelect);
+    if (pScore === 5|| cScore === 5) {
+        if (tScore === 1) {
+        sendResult("game end");
+        tScore--;
+        }
     }
 }
 
 
-function game(){
 
-    if (Pscore > compscore){
-        console.log("you win!")
-    }
-    if (Pscore < compscore){
-        console.log("you lose!")
-    }
-    if (Pscore === compscore){
-        console.log("you tied!")
-    }
 
-}
