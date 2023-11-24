@@ -44,16 +44,6 @@ function playRound (playerSelection, computerSelection) {
 
 
 function game(){
-    playRound (playerSelection, computerSelection);
-    console.log(Pscore + " " + compscore);
-    playRound (playerSelection, computerSelection);
-    console.log(Pscore + " " + compscore);
-    playRound (playerSelection, computerSelection);
-    console.log(Pscore + " " + compscore);
-    playRound (playerSelection, computerSelection);
-    console.log(Pscore + " " + compscore);
-    playRound (playerSelection, computerSelection);
-    console.log(Pscore + " " + compscore);
 
     if (Pscore > compscore){
         console.log("you win!")
